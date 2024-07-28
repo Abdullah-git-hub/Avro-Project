@@ -103,9 +103,3 @@ export function tokenize(sourceCode: string): Token[] {
     tokens.push({ value: "EndOfFile", type: TokenType.EOF });
     return tokens;
 }
-
-let p = tokenize("চলক ক = ১০");
-
-p.forEach((token) => {
-    console.log(token);
-});

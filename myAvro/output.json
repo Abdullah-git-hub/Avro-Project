@@ -1,0 +1,26 @@
+{
+    "kind": "Program",
+    "body": [
+        {
+            "kind": "BinaryExpr",
+            "left": {
+                "kind": "BinaryExpr",
+                "left": { "kind": "Identifier", "symbol": "ক" },
+                "right": { "kind": "NumericLiteral", "value": 10 },
+                "operator": "+"
+            },
+            "right": {
+                "kind": "BinaryExpr",
+                "left": {
+                    "kind": "BinaryExpr",
+                    "left": { "kind": "NumericLiteral", "value": 99 },
+                    "right": { "kind": "NumericLiteral", "value": 3 },
+                    "operator": "/"
+                },
+                "right": { "kind": "Identifier", "symbol": "ফ" },
+                "operator": "*"
+            },
+            "operator": "-"
+        }
+    ]
+}

@@ -53,8 +53,6 @@ export function tokenize(sourceCode: string): Token[] {
     const tokens = new Array<Token>();
     const src = sourceCode.split("");
 
-    console.log("active");
-
     while (src.length > 0) {
         if (src[0] == "(") {
             tokens.push(tokenBuilder(src.shift(), TokenType.OpenParen));

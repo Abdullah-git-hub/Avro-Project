@@ -6,21 +6,16 @@
             "left": {
                 "kind": "BinaryExpr",
                 "left": { "kind": "Identifier", "symbol": "ক" },
-                "right": { "kind": "NumericLiteral", "value": 10 },
+                "right": {
+                    "kind": "BinaryExpr",
+                    "left": { "kind": "NullLiteral", "value": "null" },
+                    "right": { "kind": "NumericLiteral", "value": 10 },
+                    "operator": "*"
+                },
                 "operator": "+"
             },
-            "right": {
-                "kind": "BinaryExpr",
-                "left": {
-                    "kind": "BinaryExpr",
-                    "left": { "kind": "NumericLiteral", "value": 99 },
-                    "right": { "kind": "NumericLiteral", "value": 3 },
-                    "operator": "/"
-                },
-                "right": { "kind": "Identifier", "symbol": "ফ" },
-                "operator": "*"
-            },
-            "operator": "-"
+            "right": { "kind": "NumericLiteral", "value": 5 },
+            "operator": "+"
         }
     ]
 }

@@ -116,6 +116,7 @@ export default class Parser {
                 } as NumericLiteral;
 
             case TokenType.Null:
+                this.eat();
                 return {
                     kind: "NullLiteral",
                     value: "null",

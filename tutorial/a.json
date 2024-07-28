@@ -1,0 +1,11 @@
+{
+    "kind": "Program",
+    "body": [
+        {
+            "kind": "BinaryExpr",
+            "left": { "kind": "NullLiteral", "value": "null" },
+            "right": { "kind": "NumericLiteral", "value": 10 },
+            "operator": "+"
+        }
+    ]
+}

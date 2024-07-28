@@ -29,7 +29,13 @@ export default class Parser {
         const prev = this.eat();
 
         if (!prev || prev.type != type) {
-            console.log("Parse error:\n", err, prev, " - Expecting: ", type);
+            console.log(
+                "পার্স করতে পারি নি:\n",
+                prev,
+                " - চেয়েছিলাম: ",
+                err,
+                type
+            );
             process.exit(0);
         }
 
@@ -127,14 +133,15 @@ export default class Parser {
                 const value = this.parse_expr();
                 this.expect(
                     TokenType.CloseParen,
-                    "Unexpected token found inside parenthesised expression. Expected closing parenthesis."
+                    // "Unexpected token found inside parenthesised expression. Expected closing parenthesis."
+                    "অপ্রত্যাশিত টোকেন পেয়েছি। একটি বন্ধ বন্ধনী আশা করেছিলাম :'("
                 );
 
                 return value;
 
             default:
                 console.log(
-                    "Unexpected token found during parsing!",
+                    "পার্সিংয়ের সময় অপ্রত্যাশিত টোকেন পাওয়া গেছে! :'(",
                     this.at()
                 );
                 process.exit(0);

@@ -5,6 +5,7 @@ import {
     Identifier,
     NumericLiteral,
     BinaryExpr,
+    VarDeclaration,
 } from "./ast";
 
 import { Token, TokenType, tokenize } from "./lexer";
@@ -57,10 +58,52 @@ export default class Parser {
         switch (this.at().type) {
             case TokenType.Let:
             case TokenType.Const:
-            // TODO: Setup (Let | const)
+                return this.parse_var_declaration();
             default:
                 return this.parse_expr();
         }
+    }
+
+    // let p = 90
+
+    parse_var_declaration(): Stmt {
+        const isConstant = this.eat().type == TokenType.Const; // let
+        const identifier = this.expect(
+            TokenType.Identifier, // p
+            "চলক অথবা ধ্রুবকের নাম দেওয়া আবশ্যক"
+        ).value;
+
+        if (this.at().type == TokenType.Semicolon) {
+            this.eat(); // let p
+            if (isConstant) {
+                throw "ধ্রুবক তৈরি করতে সাথে মান দেওয়া আবশ্যক";
+            }
+
+            return {
+                kind: "VarDeclaration",
+                identifier,
+                constant: false,
+            } as VarDeclaration;
+        }
+
+        this.expect(
+            TokenType.Equals, // = equal sign tao eat() hoye jabe
+            "চলক তৈরি করতে চলকের নামের পর '=' চিহ্ন প্রয়োজন"
+        );
+
+        const declaration = {
+            kind: "VarDeclaration",
+            identifier,
+            constant: isConstant,
+            value: this.parse_expr(),
+        } as VarDeclaration;
+
+        this.expect(
+            TokenType.Semicolon,
+            "প্রতিটি স্টেটমেন্ট একটি সেমিকোলন ';' দিয়ে শেষ হতে হবে"
+        );
+
+        return declaration;
     }
 
     // additive -> multiplictive -> primary

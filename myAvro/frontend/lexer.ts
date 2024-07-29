@@ -7,6 +7,7 @@ export enum TokenType {
     BinaryOperator,
     Let,
     Const,
+    Semicolon,
     EOF, // End Of File
 }
 
@@ -68,6 +69,8 @@ export function tokenize(sourceCode: string): Token[] {
             tokens.push(tokenBuilder(src.shift(), TokenType.BinaryOperator));
         } else if (src[0] == "=") {
             tokens.push(tokenBuilder(src.shift(), TokenType.Equals));
+        } else if (src[0] == ";") {
+            tokens.push(tokenBuilder(src.shift(), TokenType.Semicolon));
         } else {
             if (isInt(src[0])) {
                 let num = "";

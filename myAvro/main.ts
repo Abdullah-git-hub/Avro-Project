@@ -10,7 +10,7 @@ env.declareVar("ঠিক", MK_BOOL(true));
 env.declareVar("ভুল", MK_BOOL(false));
 env.declareVar("কিছুনা", MK_NULL());
 
-const program = parser.produceAST("ঠিক");
+const program = parser.produceAST("ধ্রুবক প = ১০;");
 
 // console.log(JSON.stringify(program));
 // console.log("=================");

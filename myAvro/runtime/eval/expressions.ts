@@ -1,4 +1,4 @@
-import { BinaryExpr, Identifier } from "../../frontend/ast.ts";
+import { AssignmentExpr, BinaryExpr, Identifier } from "../../frontend/ast.ts";
 import Environment from "../environment.ts";
 import { evaluate } from "../interpreter.ts";
 import { NumberVal, RuntimeVal, MK_NULL } from "../values.ts";
@@ -50,4 +50,18 @@ export function eval_identifier(
 ): RuntimeVal {
     const val = env.lookupVar(ident.symbol);
     return val;
+}
+
+export function eval_assignment_expr(
+    node: AssignmentExpr,
+    env: Environment
+): RuntimeVal {
+    if (node.assigne.kind != "Identifier") {
+        throw `এ্যাসাইনমেন্ট এক্সপ্রেশন সঠিক হয় নি ${JSON.stringify(
+            node.assigne
+        )}`;
+    }
+
+    const varName = (node.assigne as Identifier).symbol;
+    return env.assignVar(varName, evaluate(node.value, env));
 }

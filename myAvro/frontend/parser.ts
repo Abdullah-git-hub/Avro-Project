@@ -6,6 +6,7 @@ import {
     NumericLiteral,
     BinaryExpr,
     VarDeclaration,
+    AssignmentExpr,
 } from "./ast.ts";
 
 import { Token, TokenType, tokenize } from "./lexer.ts";
@@ -36,7 +37,7 @@ export default class Parser {
                 err,
                 type
             );
-            process.exit(0);
+            Deno.exit(0);
         }
 
         return prev;
@@ -45,7 +46,7 @@ export default class Parser {
     private BtoENumConvert(banglaNum: string) {
         let srcNumArr = banglaNum.split("");
         let banglaNumArr = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
-        let engNumArr = [];
+        let engNumArr: number[] = [];
 
         for (const num of srcNumArr) {
             engNumArr.push(banglaNumArr.indexOf(num));
@@ -106,9 +107,25 @@ export default class Parser {
         return declaration;
     }
 
-    // additive -> multiplictive -> primary
+    // assignment -> additive -> multiplictive -> primary
     private parse_expr(): Expr {
-        return this.parse_additive_expr();
+        return this.parse_assignment_expr();
+    }
+
+    private parse_assignment_expr(): Expr {
+        const left = this.parse_additive_expr();
+
+        if (this.at().type == TokenType.Equals) {
+            this.eat();
+            const right = this.parse_assignment_expr();
+            return {
+                kind: "AssignmentExpr",
+                assigne: left,
+                value: right,
+            } as AssignmentExpr;
+        }
+
+        return left;
     }
 
     private parse_additive_expr(): Expr {
@@ -182,7 +199,7 @@ export default class Parser {
                     "পার্সিংয়ের সময় অপ্রত্যাশিত টোকেন পাওয়া গেছে! :'(",
                     this.at()
                 );
-                process.exit(0);
+                Deno.exit(0);
         }
     }
 

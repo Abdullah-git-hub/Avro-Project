@@ -12,7 +12,7 @@ env.declareVar("ভুল", MK_BOOL(false), true);
 env.declareVar("কিছুনা", MK_NULL(), true);
 
 // INITIALIZE REPL
-console.log("\nRepl v0.1");
+console.log("\nAvroRepl v1.0");
 
 // Continue Repl Until User Stops Or Types `exit`
 while (true) {

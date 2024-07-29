@@ -96,7 +96,7 @@ export function tokenize(sourceCode: string): Token[] {
                 src.shift(); //Skip the current char
             } else {
                 console.log("Unrecognized charecter found at ", src[0]);
-                process.exit(0);
+                Deno.exit(0);
             }
         }
     }

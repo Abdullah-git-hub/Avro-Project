@@ -6,7 +6,7 @@ export enum TokenType {
     CloseParen,
     BinaryOperator,
     Let,
-    Null,
+    Const,
     EOF, // End Of File
 }
 
@@ -17,7 +17,7 @@ export interface Token {
 
 const KEYWORDS: Record<string, TokenType> = {
     চলক: TokenType.Let,
-    কিছুনা: TokenType.Null,
+    ধ্রুবক: TokenType.Const,
 };
 
 function tokenBuilder(value = "", type: TokenType): Token {

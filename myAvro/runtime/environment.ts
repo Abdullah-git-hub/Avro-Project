@@ -4,7 +4,7 @@ export default class Environment {
     private parent?: Environment;
     private variables: Map<string, RuntimeVal>;
 
-    constructor(parentENV: Environment) {
+    constructor(parentENV?: Environment) {
         this.parent = parentENV;
         this.variables = new Map();
     }
@@ -35,7 +35,7 @@ export default class Environment {
         }
 
         if (this.parent == undefined) {
-            throw `${varName} চলকটি সমাধান করা যাচ্ছে না কারণ এটি বিদ্যমান নেই`;
+            throw `'${varName}' চলকটি সমাধান করা যাচ্ছে না কারণ এটি বিদ্যমান নেই`;
         }
 
         return this.parent.resolve(varName);

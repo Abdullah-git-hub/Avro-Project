@@ -4,7 +4,6 @@ import {
     Program,
     Identifier,
     NumericLiteral,
-    NullLiteral,
     BinaryExpr,
 } from "./ast";
 
@@ -55,9 +54,13 @@ export default class Parser {
     }
 
     private parse_stmt(): Stmt {
-        // no statement till now so skip to parse expr
-
-        return this.parse_expr();
+        switch (this.at().type) {
+            case TokenType.Let:
+            case TokenType.Const:
+            // TODO: Setup (Let | const)
+            default:
+                return this.parse_expr();
+        }
     }
 
     // additive -> multiplictive -> primary
@@ -121,19 +124,11 @@ export default class Parser {
                     value: parseFloat(convertedEngNum),
                 } as NumericLiteral;
 
-            case TokenType.Null:
-                this.eat();
-                return {
-                    kind: "NullLiteral",
-                    value: "null",
-                } as NullLiteral;
-
             case TokenType.OpenParen:
                 this.eat();
                 const value = this.parse_expr();
                 this.expect(
                     TokenType.CloseParen,
-                    // "Unexpected token found inside parenthesised expression. Expected closing parenthesis."
                     "অপ্রত্যাশিত টোকেন পেয়েছি। একটি বন্ধ বন্ধনী আশা করেছিলাম :'("
                 );
 

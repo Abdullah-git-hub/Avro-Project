@@ -6,9 +6,9 @@ import {
     NumericLiteral,
     BinaryExpr,
     VarDeclaration,
-} from "./ast";
+} from "./ast.ts";
 
-import { Token, TokenType, tokenize } from "./lexer";
+import { Token, TokenType, tokenize } from "./lexer.ts";
 
 export default class Parser {
     private tokens: Token[] = [];

@@ -99,10 +99,10 @@ export default class Parser {
             value: this.parse_expr(),
         } as VarDeclaration;
 
-        this.expect(
-            TokenType.Semicolon,
-            "প্রতিটি স্টেটমেন্ট একটি সেমিকোলন ';' দিয়ে শেষ হতে হবে"
-        );
+        // this.expect(
+        //     TokenType.Semicolon,
+        //     "প্রতিটি স্টেটমেন্ট একটি সেমিকোলন ';' দিয়ে শেষ হতে হবে"
+        // );
 
         return declaration;
     }
@@ -189,7 +189,7 @@ export default class Parser {
                 const value = this.parse_expr();
                 this.expect(
                     TokenType.CloseParen,
-                    "অপ্রত্যাশিত টোকেন পেয়েছি। একটি বন্ধ বন্ধনী আশা করেছিলাম :'("
+                    "অপ্রত্যাশিত টোকেন পেয়েছি। একটি বন্ধ বন্ধনী আশা করেছিলাম"
                 );
 
                 return value;

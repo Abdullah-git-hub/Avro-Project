@@ -6,9 +6,6 @@ import { MK_BOOL, MK_NULL, MK_NUM } from "./runtime/values.ts";
 async function run(filename: string) {
     const parser = new Parser();
     const env = new Environment();
-    env.declareVar("ঠিক", MK_BOOL(true), true);
-    env.declareVar("ভুল", MK_BOOL(false), true);
-    env.declareVar("কিছুনা", MK_NULL(), true);
 
     const input = await Deno.readTextFile(filename);
     const program = parser.produceAST(input.toString());
@@ -32,4 +29,4 @@ async function run(filename: string) {
 //     console.log(result);
 // }
 
-run("/myAvro/mycode.txt");
+run("./mycode.txt");
